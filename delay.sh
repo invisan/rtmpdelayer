@@ -15,9 +15,6 @@ fpath="$path/$file"
 jdate=$(date +%s)
 cdate=$(stat -c "%W" $fpath)
 
-echo $time
-
-
 if [ $format -eq "m" ]
 then
         echo Minutes
@@ -27,8 +24,6 @@ fi
 ndate=$(expr $cdate + $numbers)
 
 dif=$(expr $ndate - $jdate)
-
-#echo Format $format Time $time numbers $numbers Ndate $ndate jdate $jdate cdate $cdate Differenz $dif Server $server App $application Key $key
 
 sleep $dif
 
