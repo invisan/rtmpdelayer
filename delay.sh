@@ -1,18 +1,17 @@
 #!/bin/bash
 server=$1
 application=$2
-#key=$3
-extserver=$4
-discord=$5
-mention1=$6
-mention2=$7
+extserver=$3
+discord=$4
+mention1=$5
+mention2=$6
 
 
 
 #Get the Variable so we can split it
-path=$8
-file=$9
-time=${9%-*}
+path=$7
+file=$8
+time=${8%-*}
 key=${time##*-}
 time=${time%-*}
 numbers=${time%?}
@@ -20,10 +19,6 @@ format=${time: -1}
 fpath="$path/$file"
 jdate=$(date +%s) 
 cdate=$(stat -c "%W" $fpath)
-
-#echo $time
-#echo $format
-
 
 if [ "$format" = "m" ]
 then
