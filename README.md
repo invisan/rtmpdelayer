@@ -50,22 +50,36 @@ application yourdelayedstream {
 
 
 ```
-/this/is/your/record/path           IN_CREATE       /this/is/the/delayscript/path/delay.sh 127.0.0.1 DELAYAPPLICATIONNAME REMOTESERVERADRESSFORANNOUNCEMENT  DISCORDWEBHOOK DISCORDGROUP DISCORDGROUP $@ $#
+/this/is/your/record/path           IN_CREATE       /this/is/the/delayscript/path/delay.sh /location/to/streamvariables.conf $@ $#
 ```
 
 
 Example:
 
 ```
-/home/invisan/myrecords            IN_CREATE        /home/invisan/delay.sh 127.0.0.1 delay myserver.com "https://discord.com/api/webhooks/SOMENUMBERSTRING" "<@&SOMENUMBERSTRING>" "<@&SOMENUMBERSTRING>" $@ $#
-/home/invisan/anotherrecord        IN_CREATE        /home/invisan/delay.sh 127.0.0.1 corporate myserver.com 1 1 1 $@ $#
+/home/invisan/myrecords            IN_CREATE        /home/invisan/delay.sh mystream1.conf $@ $#
+/home/invisan/anotherrecord        IN_CREATE        /home/invisan/delay.sh myotherstream.conf $@ $#
 ```
 
 Close the Editor with CTRL + X and save your Changes. You can add more then one line if you want to stream to different Applications for example. The Important thing is dont remove the $@ and $# at the end. These are used to pass the Filepath and the name of the File to the Delay Script.
 Incron itself checks the Folder you specify at the first Position with the IN_CREATE Tag for newly created files. As soon as a file is created in the Folder specified in the same Line it will trigger the Command at the End.
 So only the Command at the end of myrecords will run if there is a stream to your application which records into that Folder. The Command from anotherrecord will not be triggered.
 
-5) Now you can stream a Teststream to your Server at example `rtmp://yourserverip/yournodelayrecordapplication` the Streamkey will pass the time of the Delay to the Script as well as the Key. You can use either seconds or minutes.
+5) Create the Configfiles for your Streams this are based on the variables.conf File. Copy it or just create your own new File.
+   The Important thing is that you dont change whats written in it. First line should always be the Server you want to Stream to. If the Server is running on the same Server the Delay Script is running use 127.0.0.1 if not use the external IP. For the externalserver you can either use the External IP or if you have a Domain you can use it as well so something like myserver.mydomain.com would work if you dont have something prohibiting the resolve of the correct IP like Cloudflare behind it. Third is the application which would be the name of the Application which gets not recorded as in the example above. Webhook would be the Webhook to Discord so you can Announce that the Stream is live to a specific Discord Channel. If you dont what that just put in a 1. Mention1 and Mention2 are to Mention specific Roles in Discord. If you dont need them you can leave them empty.
+   
+Example:   
+```
+server="127.0.0.1"
+extserver="servers.mydomain.com"
+application="yourdelayedstream"
+webhook="https://discord.com/api/webhooks/YourWebhookServer/YourWebhookKey"
+mention1="<@&YOUR1STROLEID>"
+mention2="<@&YOUR2NDROLEID>"
+```
+   
+
+6) Now you can stream a Teststream to your Server at example `rtmp://yourserverip/yournodelayrecordapplication` the Streamkey will pass the time of the Delay to the Script as well as the Key. You can use either seconds or minutes.
 
 Example:
 
