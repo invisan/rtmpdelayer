@@ -50,22 +50,22 @@ application yourdelayedstream {
 
 
 ```
-/this/is/your/record/path           IN_CREATE       /this/is/the/delayscript/path/delay.sh 127.0.0.1 DELAYAPPLICATIONNAME KEYOFTHESTREAM $@ $#
+/this/is/your/record/path           IN_CREATE       /this/is/the/delayscript/path/delay.sh 127.0.0.1 DELAYAPPLICATIONNAME REMOTESERVERADRESSFORANNOUNCEMENT  DISCORDWEBHOOK DISCORDGROUP DISCORDGROUP $@ $#
 ```
 
 
 Example:
 
 ```
-/home/invisan/myrecords            IN_CREATE        /home/invisan/delay.sh 127.0.0.1 delay delayed $@ $#
-/home/invisan/anotherrecord        IN_CREATE        /home/invisan/delay.sh 127.0.0.1 corporate mystream $@ $#
+/home/invisan/myrecords            IN_CREATE        /home/invisan/delay.sh 127.0.0.1 delay myserver.com "https://discord.com/api/webhooks/SOMENUMBERSTRING" "<@&SOMENUMBERSTRING>" "<@&SOMENUMBERSTRING>" $@ $#
+/home/invisan/anotherrecord        IN_CREATE        /home/invisan/delay.sh 127.0.0.1 corporate myserver.com 1 1 1 $@ $#
 ```
 
 Close the Editor with CTRL + X and save your Changes. You can add more then one line if you want to stream to different Applications for example. The Important thing is dont remove the $@ and $# at the end. These are used to pass the Filepath and the name of the File to the Delay Script.
 Incron itself checks the Folder you specify at the first Position with the IN_CREATE Tag for newly created files. As soon as a file is created in the Folder specified in the same Line it will trigger the Command at the End.
 So only the Command at the end of myrecords will run if there is a stream to your application which records into that Folder. The Command from anotherrecord will not be triggered.
 
-5) Now you can stream a Teststream to your Server at example `rtmp://yourserverip/yournodelayrecordapplication` the Streamkey will pass the time of the Delay to the Script. You can use either seconds or minutes.
+5) Now you can stream a Teststream to your Server at example `rtmp://yourserverip/yournodelayrecordapplication` the Streamkey will pass the time of the Delay to the Script as well as the Key. You can use either seconds or minutes.
 
 Example:
 
@@ -73,7 +73,7 @@ Example:
 8m-yourname
 ```
 
-Will result in the Delay being 8 Minutes
+Will result in the Delay being 8 Minutes and the Key for the Stream being yourname.
 
 ```
 25s-yourname
