@@ -2,7 +2,8 @@
 This is a quick and small Delay script for Linux Based on Bash, incrontab and ffmpeg
 
 Features:
-- Leightweight
+- Lightweight
+- Discord Integration to announce when the Delay Script starts and when the Stream goes live
 - Adjust the Delay Variable through the Streamkey
 - Almost direct reconnect when you loose the connection
 - Script starts automatically when there is a new File being recorded
