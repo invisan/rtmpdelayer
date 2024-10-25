@@ -59,11 +59,12 @@ Example:
 
 ```
 /home/invisan/myrecords            IN_CREATE        /home/invisan/delay.sh mystream1.conf $@ $#
-/home/invisan/anotherrecord        IN_CREATE        /home/invisan/delay.sh myotherstream.conf $@ $#
+/home/invisan/anotherrecord        IN_CREATE,rescursive=true        /home/invisan/delay.sh myotherstream.conf $@ $#
 ```
 
 Close the Editor with CTRL + X and save your Changes. You can add more then one line if you want to stream to different Applications for example. The Important thing is dont remove the $@ and $# at the end. These are used to pass the Filepath and the name of the File to the Delay Script.
 Incron itself checks the Folder you specify at the first Position with the IN_CREATE Tag for newly created files. As soon as a file is created in the Folder specified in the same Line it will trigger the Command at the End.
+If you add ,recursive=true incrontab will also check the folder recuresively.
 So only the Command at the end of myrecords will run if there is a stream to your application which records into that Folder. The Command from anotherrecord will not be triggered.
 
 5) Create the Configfiles for your Streams this are based on the variables.conf File. Copy it or just create your own new File.
